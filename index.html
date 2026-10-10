@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Attendance System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="logo">CT</span>
+        <div><h2>CampusTrack</h2><small>Attendance Portal</small></div>
+      </div>
+      <p class="nav-heading">MENU</p>
+      <a href="#dashboard" class="nav-link active">▦ &nbsp; Dashboard</a>
+      <a href="#attendance" class="nav-link">✓ &nbsp; Attendance</a>
+      <a href="#students" class="nav-link">♙ &nbsp; Students</a>
+      <a href="#reports" class="nav-link">▤ &nbsp; Reports</a>
+      <div class="sidebar-note">
+        <strong>Stay on track!</strong>
+        <p>Keep your class attendance organized and up to date.</p>
+      </div>
+      <div class="admin">● &nbsp; Administrator <small>Local demo</small></div>
+    </aside>
+
+    <main class="main" id="dashboard">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="Menu">☰</button>
+        <span>Workspace / <strong>Dashboard</strong></span>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle theme">☾</button>
+      </header>
+
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">COLLEGE MANAGEMENT</p>
+          <h1>Attendance Dashboard</h1>
+          <p class="muted">Manage students and track daily attendance.</p>
+        </div>
+        <label class="date-pill">▦ <input type="date" id="attendanceDate" aria-label="Select attendance date"></label>
+      </section>
+
+      <section class="stats">
+        <article class="stat-card">
+          <span>Total Students</span><div class="stat-icon blue">♙</div>
+          <h2 id="totalStudents">10</h2><small>Registered students</small>
+        </article>
+        <article class="stat-card">
+          <span>Present Today</span><div class="stat-icon green">✓</div>
+          <h2 id="presentCount">0</h2><small>Marked present</small>
+        </article>
+        <article class="stat-card">
+          <span>Absent Today</span><div class="stat-icon red">×</div>
+          <h2 id="absentCount">0</h2><small>Marked absent</small>
+        </article>
+        <article class="stat-card">
+          <span>Attendance Rate</span><div class="stat-icon purple">↗</div>
+          <h2 id="attendanceRate">0%</h2><small>For selected date</small>
+        </article>
+      </section>
+
+      <section class="panel" id="attendance">
+        <div class="panel-heading">
+          <div><h3>Daily Attendance</h3><p class="muted">Mark each student's attendance below.</p></div>
+          <button class="btn btn-light" id="markAllBtn">✓ Mark All Present</button>
+        </div>
+
+        <div class="toolbar">
+          <input type="search" id="searchInput" placeholder="Search name or roll number...">
+          <span id="resultCount">10 students</span>
+        </div>
+
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr><th>STUDENT</th><th>ROLL NUMBER</th><th>STATUS</th><th>OVERALL ATTENDANCE</th><th>ACTION</th></tr>
+            </thead>
+            <tbody id="studentTable"></tbody>
+          </table>
+          <div id="emptyState" class="empty hidden">No students found. Try another search.</div>
+        </div>
+
+        <div class="panel-footer">
+          <span id="attendanceSummary">No attendance marked for this date yet.</span>
+          <button class="btn btn-primary" id="saveBtn">Save Attendance →</button>
+        </div>
+      </section>
+
+      <section class="lower-grid">
+        <div class="panel" id="students">
+          <div class="panel-heading">
+            <div><h3>Student Directory</h3><p class="muted">Manage your class list.</p></div>
+            <button class="btn btn-primary" id="addStudentBtn">＋ Add Student</button>
+          </div>
+          <div id="studentDirectory" class="directory"></div>
+        </div>
+
+        <div class="panel" id="reports">
+          <div class="panel-heading">
+            <div><h3>Attendance Report</h3><p class="muted">Summary for selected date.</p></div>
+          </div>
+          <div class="report-main">
+            <div><small class="muted">Attendance Percentage</small><h2 id="reportRate">0%</h2></div>
+            <div class="donut" id="donut"><span id="donutText">0%</span></div>
+          </div>
+          <div class="legend">
+            <div><span class="dot green-bg"></span> Present <strong id="reportPresent">0</strong></div>
+            <div><span class="dot red-bg"></span> Absent <strong id="reportAbsent">0</strong></div>
+            <div><span class="dot gray-bg"></span> Not marked <strong id="reportUnmarked">10</strong></div>
+          </div>
+          <button class="btn btn-light full-btn" id="downloadBtn">Download Date Report (CSV) ↓</button>
+        </div>
+      </section>
+
+      <footer>© <span id="year"></span> CampusTrack <span>• Data stored in this browser</span></footer>
+    </main>
+  </div>
+
+  <div class="modal hidden" id="studentModal">
+    <form class="modal-box" id="studentForm">
+      <div class="modal-title"><h3>Add New Student</h3><button type="button" id="closeModal" class="icon-btn">×</button></div>
+      <label for="studentName">Full Name</label>
+      <input id="studentName" type="text" maxlength="70" placeholder="e.g. Ayesha Khan" required>
+      <label for="studentRoll">Roll Number</label>
+      <input id="studentRoll" type="text" maxlength="25" placeholder="e.g. CS-011" required>
+      <p class="muted">Each roll number must be unique.</p>
+      <div class="modal-actions"><button type="button" class="btn btn-light" id="cancelModal">Cancel</button><button type="submit" class="btn btn-primary">Add Student</button></div>
+    </form>
+  </div>
+
+  <div id="toastRegion" class="toast-region" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
